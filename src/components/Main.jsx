@@ -37,7 +37,7 @@ const Main = () => {
             <div className="container">
                 <div className="page">
                     <div className="row">
-                        <div className="col-md-9">
+                        <div className="col-md-12">
                             <div className="slider">
                                 <ul className="slides">
                                     {console.log(topMovies)}
@@ -47,7 +47,9 @@ const Main = () => {
                                                 <a href="#">
                                                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
                                                 </a>
-                                                <h3>{movie.overview}</h3>
+                                                <br/>
+                                                <h2>{movie.title}</h2>
+                                                <h3>Overview - {movie.overview}</h3>
                                             </li>
                                         )
                                     })}
