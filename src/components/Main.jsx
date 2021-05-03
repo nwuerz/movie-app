@@ -43,13 +43,14 @@ const Main = () => {
                                     {console.log(topMovies)}
                                     {topMovies.map(movie => {
                                         return (
-                                            <li>
+                                            <li className="col-md-4">
                                                 <a href="#">
                                                     <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
                                                 </a>
                                                 <br/>
                                                 <h2>{movie.title}</h2>
-                                                <h3>Overview - {movie.overview}</h3>
+                                                <h3>Overview: </h3>
+                                                <h4>{movie.overview}</h4>
                                             </li>
                                         )
                                     })}
