@@ -11,10 +11,9 @@ function App({ location }) {
   return (
     <body>
       <div id='site-content'>
-        
+      <NavBar />
         <Switch>
           <Route exact path={'/'}>
-            <NavBar />
             <Main />
           </Route>
           <Route exact path={pathname} component={MovieDetail}/>

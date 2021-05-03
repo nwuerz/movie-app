@@ -50,6 +50,7 @@ const Main = () => {
                         <div className="col-md-12">
                             <div className="slider">
                                 <ul className="slides">
+                                    {console.log(topMovies)}
                                     {topMovies.map(movie => {
                                         return (
                                             <li onClick={() => redirectToMovie(movie.id)} key={movie.id} className="col-md-4">

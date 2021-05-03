@@ -15,6 +15,14 @@ export const ContextProvider = props => {
             const url = `https://api.themoviedb.org/3/movie/${featuredMovie}?api_key=${apiKey}&language=en-US`;
             const response = await axios.get(url);
             console.log(response)
+            const { title, overview, runtime, popularity, poster_path } = response.data
+            setMovieDetails({
+                title,
+                overview,
+                runtime,
+                popularity,
+                image: poster_path
+            });
         }
         getMovieDetails(featuredMovie);
         
@@ -22,6 +30,7 @@ export const ContextProvider = props => {
 
     const value = {
         featuredMovie,
+        movieDetails,
         actions: {
             setFeaturedMovie
         }
