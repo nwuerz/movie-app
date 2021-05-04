@@ -1,6 +1,14 @@
-import React from 'react';
+import React, { useRef } from 'react';
 
 const NavBar = () => {
+
+	const searchVal = useRef(null)
+
+	const onClick = () => {
+		console.log(searchVal.current.value)
+	}
+	
+
     return ( 
         <header className="site-header">
 				<div className="container">
@@ -15,17 +23,17 @@ const NavBar = () => {
 					<div className="main-navigation">
 						<button type="button" className="menu-toggle"><i className="fa fa-bars"></i></button>
 						<ul className="menu">
-							<li className="menu-item current-menu-item"><a href="index.html">Home</a></li>
+							<li className="menu-item current-menu-item"><a href="/">Home</a></li>
 							{/* <li className="menu-item"><a href="about.html">About</a></li>
 							<li className="menu-item"><a href="review.html">Movie reviews</a></li>
 							<li className="menu-item"><a href="joinus.html">Join us</a></li>
 							<li className="menu-item"><a href="contact.html">Contact</a></li> */}
 						</ul> 
 
-						<form action="#" className="search-form">
-							<input type="text" placeholder="Search..."/>
-							<button><i className="fa fa-search"></i></button>
-						</form>
+						<input type="text" ref={searchVal} placeholder="Search..."/>
+						<button style={{ height: '23px', width: '20px', backgroundColor: 'green' }} onClick={() => onClick()}></button>
+
+						
 					</div> 
 
 					<div className="mobile-navigation"></div>
