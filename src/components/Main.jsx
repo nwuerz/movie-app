@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import axios from 'axios';
+import api from '../utils/api';
 import Context from '../context';
 
 require('dotenv').config();
@@ -18,18 +19,14 @@ const Main = () => {
 
 
         const getMovies = async () => {
-            try {
-                const response = await axios.get(url);
-                const movies = response.data.results;
-                let moviesArr = [];
-                for (let i = 0; i < 3; i++) {
-                    const movie = movies[i];
-                    moviesArr.push(movie)
-                }
-                setTopMovies(moviesArr);
-            } catch (error) {
-                console.log(error);
+            const response = await api.getTopMovies();
+            const movies = response.data.results;
+            let moviesArr = [];
+            for (let i = 0; i < 3; i++) {
+                const movie = movies[i];
+                moviesArr.push(movie)
             }
+            setTopMovies(moviesArr);
         }
 
         getMovies();
