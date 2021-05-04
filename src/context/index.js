@@ -14,7 +14,7 @@ export const ContextProvider = props => {
             const response = await api.getOneMovie(featuredMovie);
             if(response){
                 console.log(response)
-                const { title, overview, runtime, popularity, poster_path, credits, reviews } = response.data
+                const { title, overview, runtime, popularity, poster_path, credits, reviews, vote_average } = response.data
                 const directorsArr = [];
                 credits.crew.forEach(person => {
                     if(person.job === 'Director') {
@@ -29,51 +29,14 @@ export const ContextProvider = props => {
                     image: poster_path,
                     directors: directorsArr,
                     cast: credits.cast,
-                    reviews: reviews.results
+                    reviews: reviews.results,
+                    rating: vote_average
                 });
             }
         }
         getMovieDetails(featuredMovie);
         
     },[featuredMovie])
-
-    //------- get cast and directors -------//
-    // const [ credits, setCredits ] = useState({});
-    // useEffect(() => {
-    //     const getCredits = async () => {
-    //         const response = await api.getMovieCredits(featuredMovie);
-    //         if(response){
-    //             console.log(response)
-    //             const { cast, crew } = response.data
-    //             const directorsArr = [];
-    //             crew.forEach(person => {
-    //                 if(person.job === 'Director') {
-    //                     directorsArr.push(person)
-    //                 }
-    //             })
-    //             setCredits({
-    //                 cast,
-    //                 directors: directorsArr
-    //             });
-    //         }
-    //     }
-    //     getCredits();
-    // },[featuredMovie]);
-
-    // //------- get reviews -------//
-    // const [ reviews, setReviews ] = useState([]);
-    // useEffect(() => {
-    //     const getReviews = async () => {
-    //         const response = await api.getMovieReviews(featuredMovie);
-    //         if(response){
-    //             setReviews(response.data.results);
-    //             console.log(response.data)
-    //         }
-    //     }
-    //     getReviews();
-
-    // },[featuredMovie])
-
 
 
     const value = {

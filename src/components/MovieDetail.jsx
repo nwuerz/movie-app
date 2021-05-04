@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from 'react';
 import Context from '../context';
 
 const MovieDetail = () => {
-	const { value : { movieDetails : { image, title, runtime, overview, directors, cast, reviews } } } = useContext(Context);
+	const { value : { movieDetails }, value : { movieDetails : { image, title, runtime, overview, directors, cast, reviews, rating } } } = useContext(Context);
 
 	useEffect(() => {
-		console.log(reviews);
-	},[directors, reviews, cast])
+
+	},[movieDetails])
 
     return ( 
         <div id="site-content">
@@ -30,7 +30,7 @@ const MovieDetail = () => {
 									</div>
 									<ul className="movie-meta">
 										<li><strong>Rating:</strong> 
-											<div className="star-rating" title="Rated 4.00 out of 5"><span style={{ width: '80%' }}><strong className="rating">4.00</strong> out of 5</span></div>
+											<span style={{ width: '80%' }}> {rating} out of 10</span>
 										</li>
 										<li><strong>Length:</strong> {runtime} min</li>
 									</ul>
