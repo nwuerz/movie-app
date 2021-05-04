@@ -15,6 +15,13 @@ const SearchResults = () => {
         history.push(path);
     }
 
+    const formatDate = date => {
+        const format = /^(\d{4})(\d{1,2})(\d{2})$/;
+        let numbersOnly = date.replace(/\D/g, '');
+        let formattedDate = numbersOnly.replace(format, `$2/$3/$1`)
+        return formattedDate;
+    }
+
     return (
         <main className="main-content">
             <div className="container">
@@ -29,7 +36,7 @@ const SearchResults = () => {
                                                 <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
                                                 <br />
                                                 <h2>{movie.title}</h2>
-                                                <h4>{movie.release_date}</h4>
+                                                <p>release date: {formatDate(movie.release_date)}</p>
                                             </li>
                                         )
                                     })}
