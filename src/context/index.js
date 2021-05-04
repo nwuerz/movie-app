@@ -40,13 +40,22 @@ export const ContextProvider = props => {
 
     // ------ get move by query --------- //
     const [ searchQuery, setSearchQuery ] = useState('');
-
-
+    const [ searchResults, setSearchResults ] = useState([]);
+    useEffect(() => {
+        const getSearchResults = async () => {
+            const response = await api.searchForMovie(searchQuery);
+            if(response) {
+                setSearchResults(response.data.results);
+            }
+        }
+        getSearchResults();
+    }, [searchQuery]);
 
     const value = {
         featuredMovie,
         movieDetails,
         searchQuery,
+        searchResults,
         actions: {
             setFeaturedMovie,
             setSearchQuery
