@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { useRouteMatch } from 'react-router';
+import api from '../utils/api';
 import axios from 'axios';
 
 const Context = React.createContext();
 
 export const ContextProvider = props => {
-    const apiKey = process.env.REACT_APP_MOVIE_KEY;
 
     const [ featuredMovie, setFeaturedMovie ] = useState('');
 
@@ -13,41 +12,65 @@ export const ContextProvider = props => {
     const [ movieDetails, setMovieDetails ] = useState({});
     useEffect(() => {
         const getMovieDetails = async featuredMovie => {
-            const url = `https://api.themoviedb.org/3/movie/${featuredMovie}?api_key=${apiKey}&language=en-US`;
-            const response = await axios.get(url);
-            console.log(response)
-            const { title, overview, runtime, popularity, poster_path, imdb_id } = response.data
-            setMovieDetails({
-                title,
-                overview,
-                runtime,
-                popularity,
-                image: poster_path,
-                imdb_id
-            });
+            const response = await api.getOneMovie(featuredMovie);
+            if(response){
+                console.log(response)
+                const { title, overview, runtime, popularity, poster_path, imdb_id } = response.data
+                setMovieDetails({
+                    title,
+                    overview,
+                    runtime,
+                    popularity,
+                    image: poster_path,
+                    imdb_id
+                });
+            }
         }
         getMovieDetails(featuredMovie);
         
     },[featuredMovie])
 
     //------- get reviews -------//
-    const [ reviews, setReviews ] = useState({});
+    const [ credits, setCredits ] = useState({});
     useEffect(() => {
-        const getMoreDetails = async () => {
-            const url = `https://api.themoviedb.org/3/movie/${featuredMovie}/reviews?api_key=${apiKey}&language=en-US`;
-            const response = await axios.get(url);
-            console.log(response);
+        const getCredits = async () => {
+            const response = await api.getMovieCredits(featuredMovie);
+            if(response){
+                console.log(response)
+                const { cast, crew } = response.data
+                const directorsArr = [];
+                crew.forEach(person => {
+                    if(person.job === 'Director') {
+                        directorsArr.push(person)
+                    }
+                })
+                setCredits({
+                    cast,
+                    directors: directorsArr
+                });
+            }
         }
-        getMoreDetails();
+        getCredits();
+    },[featuredMovie]);
 
-    },[featuredMovie])
+    //------- get reviews -------//
+    // const [ reviews, setReviews ] = useState({});
+    // useEffect(() => {
+    //     const getMoreDetails = async () => {
+    //         const url = `https://api.themoviedb.org/3/movie/${featuredMovie}/reviews?api_key=${apiKey}&language=en-US`;
+    //         const response = await axios.get(url);
+    //         console.log(response);
+    //     }
+    //     getMoreDetails();
 
-    // ------ get specs --------//
-    const [ specs, setSpecs ] = useState({});
+    // },[featuredMovie])
+
+
 
     const value = {
         featuredMovie,
         movieDetails,
+        credits,
         actions: {
             setFeaturedMovie
         }

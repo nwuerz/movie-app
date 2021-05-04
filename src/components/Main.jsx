@@ -1,10 +1,8 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
-import axios from 'axios';
 import api from '../utils/api';
 import Context from '../context';
 
-require('dotenv').config();
 
 const Main = () => {
     let history = useHistory();
@@ -14,9 +12,6 @@ const Main = () => {
     const [topMovies, setTopMovies] = useState([]);
 
     useEffect(() => {
-        const apiKey = process.env.REACT_APP_MOVIE_KEY;
-        let url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&language=en-US&page=1`;
-
 
         const getMovies = async () => {
             const response = await api.getTopMovies();

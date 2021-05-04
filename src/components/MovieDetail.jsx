@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useContext } from 'react';
 import Context from '../context';
 
 const MovieDetail = () => {
-	const { value : { movieDetails : { image, title, runtime, overview } } } = useContext(Context);
+	const { value : { movieDetails : { image, title, runtime, overview }, credits : { cast, directors } } } = useContext(Context);
+
+	useEffect(() => {
+		
+	},[cast, directors])
 
     return ( 
         <div id="site-content">
@@ -33,8 +37,12 @@ const MovieDetail = () => {
 									</ul>
 
 									<ul className="starring">
-										<li><strong>Directors:</strong> Kirk de Mico (as Kirk DeMico). Chris Sanders</li>
-										<li><strong>Stars:</strong> Nicolas Cage, Ryan Reynolds, Emma Stone</li>
+										<li><strong>Directors:</strong> {directors ? directors.map(person => {
+											return <span key={person.id}>{person.name}, </span>
+										}): null}</li>
+										<li><strong>Stars:</strong> {cast ? cast.map(person => {
+											return <span key={person.id}>{person.name}, </span>
+										}): null}</li>
 									</ul>
 								</div>
 							</div> 
