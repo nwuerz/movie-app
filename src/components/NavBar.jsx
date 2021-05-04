@@ -1,11 +1,13 @@
-import React, { useRef } from 'react';
+import React, { useRef, useContext } from 'react';
+import Context from '../context';
 
 const NavBar = () => {
-
+	const { value: {actions : { setSearchQuery }} } = useContext(Context);
 	const searchVal = useRef(null)
 
 	const onClick = () => {
-		console.log(searchVal.current.value)
+		const query= searchVal.current.value;
+		setSearchQuery(query);
 	}
 	
 

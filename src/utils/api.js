@@ -24,6 +24,16 @@ export default {
         } catch (error) {
             console.error(error);
         }
+    },
+
+    searchForMovie: async query => {
+        try {
+            const url = `https://api.themoviedb.org/3/search/movie?api_key=${apiKey}&language=en-US&query=${query}&page=1&include_adult=false`;
+            const response = await axios.get(url);
+            return response;
+        } catch (error) {
+            console.error(error);
+        }
     }
 
 }

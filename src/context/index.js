@@ -7,7 +7,7 @@ export const ContextProvider = props => {
 
     const [ featuredMovie, setFeaturedMovie ] = useState('');
 
-    //------- get basic movie info -------//
+    //------- get movie info by id-------//
     const [ movieDetails, setMovieDetails ] = useState({});
     useEffect(() => {
         const getMovieDetails = async featuredMovie => {
@@ -38,12 +38,18 @@ export const ContextProvider = props => {
         
     },[featuredMovie])
 
+    // ------ get move by query --------- //
+    const [ searchQuery, setSearchQuery ] = useState('');
+
+
 
     const value = {
         featuredMovie,
         movieDetails,
+        searchQuery,
         actions: {
-            setFeaturedMovie
+            setFeaturedMovie,
+            setSearchQuery
         }
     }
 
