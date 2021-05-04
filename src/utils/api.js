@@ -18,17 +18,7 @@ export default {
 
     getOneMovie: async id => {
         try {
-            const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
-            const response = await axios.get(url);
-            return response;
-        } catch (error) {
-            console.error(error);
-        }
-    },
-
-    getMovieCredits: async id => {
-        try {
-            const url = `https://api.themoviedb.org/3/movie/${id}/credits?api_key=${apiKey}&language=en-US`;
+            const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US&append_to_response=credits,reviews`;
             const response = await axios.get(url);
             return response;
         } catch (error) {

@@ -2,11 +2,11 @@ import React, { useEffect, useContext } from 'react';
 import Context from '../context';
 
 const MovieDetail = () => {
-	const { value : { movieDetails : { image, title, runtime, overview }, credits : { cast, directors } } } = useContext(Context);
+	const { value : { movieDetails : { image, title, runtime, overview, directors, cast, reviews } } } = useContext(Context);
 
 	useEffect(() => {
-		
-	},[cast, directors])
+		console.log(reviews);
+	},[directors, reviews, cast])
 
     return ( 
         <div id="site-content">
@@ -14,8 +14,7 @@ const MovieDetail = () => {
 				<div className="container">
 					<div className="page">
 						<div className="breadcrumbs">
-							<a href="index.html">Home</a>
-							<a href="review.html">Movie Review</a>
+							<a href="/">Home</a>
 							<span>{title}</span>
 						</div>
 
@@ -40,9 +39,20 @@ const MovieDetail = () => {
 										<li><strong>Directors:</strong> {directors ? directors.map(person => {
 											return <span key={person.id}>{person.name}, </span>
 										}): null}</li>
+
 										<li><strong>Stars:</strong> {cast ? cast.map(person => {
 											return <span key={person.id}>{person.name}, </span>
 										}): null}</li>
+
+										<li><strong>Reviews: </strong> {reviews ? reviews.map(review => {
+											return (
+												<div>
+													<span key={review.id}><i>- "{review.content}"</i><br></br></span>
+													<br></br>
+												</div>
+											)
+										}) :  <p>sorry, no reviews!</p>}</li>
+
 									</ul>
 								</div>
 							</div> 
