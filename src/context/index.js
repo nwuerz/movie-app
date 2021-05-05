@@ -60,17 +60,19 @@ export const ContextProvider = props => {
     const today = new Date();
     const year = today.getFullYear();
     ("0" + (today.getMonth() + 2)).slice(-2)
-    const lastMonth = today.getMonth();
+    
+    const thisMonth = today.getMonth() + 1;
     const nextMonth = today.getMonth() + 2;
+    const lastMonth = today.getMonth() + 3;
     // dates for this month's search //
-    const thisMonthStartDate = `${year}-0${lastMonth}-${lastday(year, lastMonth)}`;
-    const thisMonthEndDate = `${year}-0${nextMonth}-01`;
+    const thisMonthStartDate = `${year}-0${thisMonth}-01`;
+    const thisMonthEndDate = `${year}-0${thisMonth}-${lastday(year, thisMonth)}`;
     // dates for next month's search //
-    const nextMonthStartDate = `${year}-0${lastMonth + 1}-${lastday(year, lastMonth + 1)}`;
-    const nextMonthEndDate = `${year}-0${nextMonth + 1}-01`;
+    const nextMonthStartDate = `${year}-0${nextMonth}-01`;
+    const nextMonthEndDate = `${year}-0${nextMonth}-${lastday(year, nextMonth)}`;
     // dates for last month's search //
-    const lastMonthStartDate = `${year}-0${lastMonth + 2}-${lastday(year, lastMonth + 2)}`
-    const lastMonthEndDate = `${year}-0${nextMonth + 2}-01`
+    const lastMonthStartDate = `${year}-0${lastMonth}-01`;
+    const lastMonthEndDate = `${year}-0${lastMonth}-${lastday(year, lastMonth)}`;
 
     const [ thisMonthReleases, setThisMonthReleases ] = useState([]);
     const [ nextMonthReleases, setNextMonthReleases ] = useState([]);
@@ -87,7 +89,7 @@ export const ContextProvider = props => {
         }
         const getLastMonthReleases = async () => {
             const response = await api.searchByDate(lastMonthStartDate, lastMonthEndDate);
-            setNextMonthReleases(response.data.results);
+            setLastMonthReleases(response.data.results);
         }
         getThisMonthReleases();
         getNextMonthReleases();

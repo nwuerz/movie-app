@@ -38,9 +38,7 @@ export default {
 
     searchByDate: async (startDate, endDate) => {
         try {
-            console.log(startDate)
-            console.log(endDate)
-            const url = `https://api.themoviedb.org/3/discover/movie?api_key=bce8d123a4c58b7b1ac1b0c9cc1045fd&language=en-US&include_adult=false&include_video=false&page=1&primary_release_date.gte=${startDate}&primary_release_date.lte=${endDate}&with_watch_monetization_types=flatrate`;
+            const url = `https://api.themoviedb.org/3/discover/movie?api_key=bce8d123a4c58b7b1ac1b0c9cc1045fd&language=en-US&sort_by=release_date.asc&include_adult=false&include_video=false&page=1&primary_release_date.gte=${startDate}&primary_release_date.lte=${endDate}&with_watch_monetization_types=flatrate`;
             const response = await axios.get(url);
             return response;
         } catch (error) {

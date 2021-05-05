@@ -7,6 +7,8 @@ import Context from '../context';
 
 const Main = () => {
     let history = useHistory();
+    const today = new Date();
+    const thisMonth = today.toLocaleString('default', { month: 'long' })
 
     const { value } = useContext(Context);
 
@@ -55,7 +57,12 @@ const Main = () => {
                                     })}
                                 </ul>
                             </div>
-                            < FutureReleases/>
+                            <hr />
+                            <div className="row">
+                                <FutureReleases month={thisMonth} movies={value.thisMonthReleases}/>
+                                <FutureReleases month={'June'} movies={value.nextMonthReleases}/>
+                                <FutureReleases month={'July'} movies={value.lastMonthReleases}/>
+                            </div>
                         </div>
                     </div>
                 </div>
