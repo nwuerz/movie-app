@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
+import FutureReleases from './FutureReleases';
 import { useHistory } from 'react-router-dom';
 import api from '../utils/api';
 import Context from '../context';
@@ -30,7 +31,6 @@ const Main = () => {
     const redirectToMovie = id => {
         const path = `/movie/${id}`;
         value.actions.setFeaturedMovie(JSON.stringify(id))
-        console.log(value.featuredMovie)
         history.push(path);
     }
 
@@ -42,7 +42,6 @@ const Main = () => {
                         <div className="col-md-12">
                             <div className="slider">
                                 <ul className="slides">
-                                    {console.log(topMovies)}
                                     {topMovies.map(movie => {
                                         return (
                                             <li onClick={() => redirectToMovie(movie.id)} key={movie.id} className="col-md-4">
@@ -56,6 +55,7 @@ const Main = () => {
                                     })}
                                 </ul>
                             </div>
+                            < FutureReleases/>
                         </div>
                     </div>
                 </div>

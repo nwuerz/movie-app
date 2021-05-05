@@ -6,7 +6,6 @@ const SearchResults = () => {
     let history = useHistory();
     const { value: { searchResults, actions: { setFeaturedMovie } } } = useContext(Context);
     useEffect(() => {
-        console.log(searchResults);
     },[searchResults]);
 
     const redirectToMovie = id => {
@@ -36,7 +35,7 @@ const SearchResults = () => {
                                                 <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
                                                 <br />
                                                 <h2>{movie.title}</h2>
-                                                <p>release date: {formatDate(movie.release_date)}</p>
+                                                <p>release date: {movie.release_date ? formatDate(movie.release_date) : null}</p>
                                             </li>
                                         )
                                     })}

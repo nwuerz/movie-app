@@ -10,7 +10,7 @@ function App({ location }) {
  
 
   return (
-    <body>
+    
       <div id='site-content'>
       <NavBar />
         <Switch>
@@ -23,7 +23,7 @@ function App({ location }) {
           <Route exact path={pathname} component={MovieDetail}/>
         </Switch>
       </div>
-    </body>
+    
   );
 }
 
