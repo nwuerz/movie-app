@@ -59,7 +59,6 @@ export const ContextProvider = props => {
     //---- date variables ----//
     const today = new Date();
     const year = today.getFullYear();
-    ("0" + (today.getMonth() + 2)).slice(-2)
     
     const thisMonth = today.getMonth() + 1;
     const nextMonth = today.getMonth() + 2;

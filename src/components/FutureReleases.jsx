@@ -1,31 +1,13 @@
-import React, {useEffect, useContext} from 'react';
-import { useHistory } from 'react-router-dom';
-import Context from '../context';
+import React, { useEffect, useState } from 'react';
+import ListItem from './ListItem';
 
 const FutureReleases = props => {
-    let history = useHistory();
-
-    const { value } = useContext(Context);
-
-    const { month, movies } = props;
+    const { month, movies, preview } = props;
+    const [showAll, setShowAll] = useState(false);
 
     useEffect(() => {
 
-    },[movies])
-
-    const formatDate = date => {
-        const format = /^(\d{4})(\d{1,2})(\d{2})$/;
-        let numbersOnly = date.replace(/\D/g, '');
-        let formattedDate = numbersOnly.replace(format, `$2/$3/$1`)
-        return formattedDate;
-    }
-
-    const redirectToMovie = id => {
-        const path = `/movie/${id}`;
-        value.actions.setFeaturedMovie(JSON.stringify(id))
-        history.push(path);
-    }
-
+    }, [movies])
 
     return (
         <>
@@ -33,18 +15,17 @@ const FutureReleases = props => {
                 <h2 className="section-title">Premiering In {month}</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 <ul className="movie-schedule">
-                    {movies ? movies.map(movie => {
+                    {showAll ? preview.map(movie => {
                         return (
-                            <li onClick={() => redirectToMovie(movie.id)} key={movie.id}>
-                                <div className="date">{formatDate(movie.release_date)}</div>
-                                <br></br>
-                                <h2 className="entry-title"><a>{movie.title}</a></h2>
-                                <br></br>
-                                <img style={{ height: '150px', width: '150px' }} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
-                            </li>
+                            <ListItem key ={movie.id} movie={movie}/>
                         )
-                    }) : null}
+                    }) : movies.map(movie => {
+                        return (
+                            <ListItem key ={movie.id} movie={movie}/>
+                        )
+                    })}
                 </ul>
+                <button onClick={() => setShowAll(!showAll)}>{showAll ? '...' : 'show less'}</button>
             </div>
         </>
     );

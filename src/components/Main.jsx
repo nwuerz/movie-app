@@ -45,6 +45,15 @@ const Main = () => {
         history.push(path);
     }
 
+    const getFirstFour = moviesArr => {
+        let fourMovies = []
+        for (let i = 0; i < 4; i++) {
+            const movie = moviesArr[i];
+            fourMovies.push(movie);
+        }
+        return fourMovies;
+    }
+
     return (
         <main className="main-content">
             <div className="container">
@@ -68,9 +77,9 @@ const Main = () => {
                             </div>
                             <hr />
                             <div className="row">
-                                <FutureReleases month={thisMonth} movies={value.thisMonthReleases}/>
-                                <FutureReleases month={nextMonth} movies={value.nextMonthReleases}/>
-                                <FutureReleases month={lastMonth} movies={value.lastMonthReleases}/>
+                                <FutureReleases month={thisMonth} preview={getFirstFour(value.thisMonthReleases)} movies={value.thisMonthReleases}/>
+                                <FutureReleases month={nextMonth} preview={getFirstFour(value.nextMonthReleases)} movies={value.nextMonthReleases}/>
+                                <FutureReleases month={lastMonth} preview={getFirstFour(value.lastMonthReleases)} movies={value.lastMonthReleases}/>
                             </div>
                         </div>
                     </div>
