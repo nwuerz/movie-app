@@ -8,7 +8,16 @@ import Context from '../context';
 const Main = () => {
     let history = useHistory();
     const today = new Date();
+    
+    const addMonths = (d,n) => {
+        var dt=new Date(d.getTime());
+        dt.setMonth(dt.getMonth()+n);
+        return dt;
+    }
+
     const thisMonth = today.toLocaleString('default', { month: 'long' })
+    const nextMonth = addMonths(today, 1).toLocaleString('default', { month: 'long' })
+    const lastMonth = addMonths(today, 2).toLocaleString('default', { month: 'long' })
 
     const { value } = useContext(Context);
 
@@ -60,8 +69,8 @@ const Main = () => {
                             <hr />
                             <div className="row">
                                 <FutureReleases month={thisMonth} movies={value.thisMonthReleases}/>
-                                <FutureReleases month={'June'} movies={value.nextMonthReleases}/>
-                                <FutureReleases month={'July'} movies={value.lastMonthReleases}/>
+                                <FutureReleases month={nextMonth} movies={value.nextMonthReleases}/>
+                                <FutureReleases month={lastMonth} movies={value.lastMonthReleases}/>
                             </div>
                         </div>
                     </div>

@@ -9,7 +9,6 @@ const FutureReleases = props => {
 
     const { month, movies } = props;
 
-    console.log(movies)
     useEffect(() => {
 
     },[movies])
