@@ -1,6 +1,12 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext} from 'react';
+import { useHistory } from 'react-router-dom';
+import Context from '../context';
 
 const FutureReleases = props => {
+    let history = useHistory();
+
+    const { value } = useContext(Context);
+
     const { month, movies } = props;
 
     console.log(movies)
@@ -15,6 +21,12 @@ const FutureReleases = props => {
         return formattedDate;
     }
 
+    const redirectToMovie = id => {
+        const path = `/movie/${id}`;
+        value.actions.setFeaturedMovie(JSON.stringify(id))
+        history.push(path);
+    }
+
 
     return (
         <>
@@ -24,31 +36,15 @@ const FutureReleases = props => {
                 <ul className="movie-schedule">
                     {movies ? movies.map(movie => {
                         return (
-                            <li key={movie.id}>
+                            <li onClick={() => redirectToMovie(movie.id)} key={movie.id}>
                                 <div className="date">{formatDate(movie.release_date)}</div>
                                 <br></br>
-                                <h2 className="entry-title"><a href="/">{movie.title}</a></h2>
+                                <h2 className="entry-title"><a>{movie.title}</a></h2>
                                 <br></br>
                                 <img style={{ height: '150px', width: '150px' }} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
                             </li>
                         )
                     }) : null}
-                    {/* <li>
-                        <div className="date">16/12</div>
-                        <h2 className="entry-title"><a href="/">Perspiciatis unde omnis</a></h2>
-                    </li>
-                    <li>
-                        <div className="date">16/12</div>
-                        <h2 className="entry-title"><a href="/">Perspiciatis unde omnis</a></h2>
-                    </li>
-                    <li>
-                        <div className="date">16/12</div>
-                        <h2 className="entry-title"><a href="/">Perspiciatis unde omnis</a></h2>
-                    </li>
-                    <li>
-                        <div className="date">16/12</div>
-                        <h2 className="entry-title"><a href="/">Perspiciatis unde omnis</a></h2>
-                    </li> */}
                 </ul>
             </div>
         </>
