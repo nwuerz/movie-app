@@ -28,7 +28,7 @@ const ListItem = props => {
             <br></br>
             <h2 className="entry-title"><a>{movie.title}</a></h2>
             <br></br>
-            <img style={{ height: '150px', width: '150px' }} src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
+            <img style={{ height: '150px', width: '150px' }} src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : `${process.env.PUBLIC_URL}/no-image.jpg`} alt={`${movie.title} poster`} />
         </li>
         </>
     );

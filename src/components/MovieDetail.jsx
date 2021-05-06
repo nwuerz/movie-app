@@ -8,6 +8,8 @@ const MovieDetail = () => {
 
 	},[movieDetails])
 
+	const noInfoMessage = 'Sorry this info isn\'t available yet';
+
     return ( 
         <div id="site-content">
 			<main className="main-content">
@@ -21,7 +23,7 @@ const MovieDetail = () => {
 						<div className="content">
 							<div className="row">
 								<div className="col-md-6">
-									<figure className="movie-poster"><img src={`https://image.tmdb.org/t/p/original/${image}`} alt="#"/></figure>
+									<figure className="movie-poster"><img src={image ? `https://image.tmdb.org/t/p/original/${image}` : `${process.env.PUBLIC_URL}/no-image.jpg`} alt="#"/></figure>
 								</div>
 								<div className="col-md-6">
 									<h2 className="movie-title">{title}</h2>
@@ -30,28 +32,28 @@ const MovieDetail = () => {
 									</div>
 									<ul className="movie-meta">
 										<li><strong>Rating:</strong> 
-											<span style={{ width: '80%' }}> {rating} out of 10</span>
+											<span style={{ width: '80%' }}> {rating ? `${rating} out of 10` : noInfoMessage}</span>
 										</li>
-										<li><strong>Length:</strong> {runtime} min</li>
+										<li><strong>Length:</strong>{runtime ? ` ${runtime} min` : noInfoMessage}</li>
 									</ul>
 
 									<ul className="starring">
 										<li><strong>Directors:</strong> {directors ? directors.map(person => {
 											return <span key={person.id}>{person.name}, </span>
-										}): null}</li>
+										}): noInfoMessage}</li>
 
-										<li><strong>Stars:</strong> {cast ? cast.map(person => {
+										<li><strong>Stars:</strong> {cast[0] ? cast.map(person => {
 											return <span key={person.id}>{person.name}, </span>
-										}): null}</li>
+										}): noInfoMessage}</li>
 
-										<li><strong>Reviews: </strong> {reviews ? reviews.map(review => {
+										<li><strong>Reviews: </strong> {reviews[0] ? reviews.map(review => {
 											return (
 												<div>
 													<span key={review.id}><i>- "{review.content}"</i><br></br></span>
 													<br></br>
 												</div>
 											)
-										}) :  <p>sorry, no reviews!</p>}</li>
+										}) : <p>{noInfoMessage}</p>}</li>
 
 									</ul>
 								</div>
