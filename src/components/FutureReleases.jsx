@@ -1,13 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import ListItem from './ListItem';
 
 const FutureReleases = props => {
     const { month, movies, preview } = props;
     const [showAll, setShowAll] = useState(false);
-
-    useEffect(() => {
-
-    }, [movies])
 
     return (
         <>
@@ -15,17 +11,19 @@ const FutureReleases = props => {
                 <h2 className="section-title">Premiering In {month}</h2>
                 <p>Lorem ipsum dolor sit amet consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.</p>
                 <ul className="movie-schedule">
-                    {showAll ? preview.map(movie => {
+                    {showAll ? movies.map(movie => {
                         return (
                             <ListItem key ={movie.id} movie={movie}/>
                         )
-                    }) : movies.map(movie => {
+                    }) : null}
+                    
+                    {!showAll && preview[0] ? preview.map(movie => {
                         return (
                             <ListItem key ={movie.id} movie={movie}/>
                         )
-                    })}
+                    }) : null}
                 </ul>
-                <button onClick={() => setShowAll(!showAll)}>{showAll ? '...' : 'show less'}</button>
+                <button onClick={() => setShowAll(!showAll)}>{showAll ? 'show less' : '...'}</button>
             </div>
         </>
     );
