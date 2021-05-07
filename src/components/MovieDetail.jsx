@@ -42,11 +42,11 @@ const MovieDetail = () => {
 											return <span key={person.id}>{person.name}, </span>
 										}): noInfoMessage}</li>
 
-										<li><strong>Stars:</strong> {cast[0] ? cast.map(person => {
+										<li><strong>Stars:</strong> {cast ? cast.map(person => {
 											return <span key={person.id}>{person.name}, </span>
 										}): noInfoMessage}</li>
 
-										<li><strong>Reviews: </strong> {reviews[0] ? reviews.map(review => {
+										<li><strong>Reviews: </strong> {reviews ? reviews.map(review => {
 											return (
 												<div>
 													<span key={review.id}><i>- "{review.content}"</i><br></br></span>
