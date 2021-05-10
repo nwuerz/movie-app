@@ -1,5 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
+import ReactPaginate from 'react-paginate';
 import Context from '../context';
 
 const SearchResults = () => {
@@ -32,7 +33,7 @@ const SearchResults = () => {
                                     {searchResults.map(movie => {
                                         return (
                                             <li onClick={() => redirectToMovie(movie.id)} key={movie.id} className="col-md-4">
-                                                <img src={`https://image.tmdb.org/t/p/original/${movie.poster_path}`} alt={`${movie.title} poster`} />
+                                                <img src={movie.poster_path ? `https://image.tmdb.org/t/p/original/${movie.poster_path}` : `${process.env.PUBLIC_URL}/no-image.jpg`} alt={`${movie.title} poster`} />
                                                 <br />
                                                 <h2>{movie.title}</h2>
                                                 <p>release date: {movie.release_date ? formatDate(movie.release_date) : null}</p>
@@ -44,6 +45,7 @@ const SearchResults = () => {
                         </div>
                     </div>
                 </div>
+            <ReactPaginate />
             </div>
         </main>
     );
